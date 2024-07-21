@@ -136,3 +136,97 @@ public class Third_3 extends HttpServlet
     
 </web-app>  
 ```
+># RequestDisptcher In Servlet 
+### The RequestDispatcher interface provides the facility of dispatching the request to another resource it may be html, servlet or jsp. This interface can also be used to include the content of another resource also
+### There are two methods defined in the RequestDispatcher interface.
+###    1. public void forward(ServletRequest request,ServletResponse response)throws ServletException,java.io.IOException:Forwards a request from a servlet to another resource (servlet, JSP file, or HTML file) on the server.
+###    2. public void include(ServletRequest request,ServletResponse response)throws ServletException,java.io.IOException:Includes the content of a resource (servlet, JSP page, or HTML file) in the response.
+## index.html
+```html
+<form action="servlet1" method="post">  
+    Name:<input type="text" name="userName"/><br/>  
+    Password:<input type="password" name="userPass"/><br/>  
+    <input type="submit" value="login"/>  
+</form> 
+```
+## login.java
+```java
+
+import java.io.*;  
+import javax.servlet.*;  
+import javax.servlet.http.*;  
+  
+public class Login extends HttpServlet {  
+  
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {  
+        response.setContentType("text/html");  
+        PrintWriter out = response.getWriter();  
+            
+        String n=request.getParameter("userName");  
+        String p=request.getParameter("userPass");  
+          
+        if(p.equals("servlet")
+        {  
+            RequestDispatcher rd=request.getRequestDispatcher("servlet2");  
+            rd.forward(request, response);  
+        }  
+        else
+        {  
+            out.print("Sorry UserName or Password Error!");  
+            RequestDispatcher rd=request.getRequestDispatcher("/index.html");  
+            rd.include(request, response);               
+        }  
+    }  
+}  
+```
+## WelcomeServle.java
+```java
+import java.io.*;  
+import javax.servlet.*;  
+import javax.servlet.http.*;  
+  
+public class WelcomeServlet extends HttpServlet 
+{  
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
+
+        response.setContentType("text/html");  
+        PrintWriter out = response.getWriter();  
+            
+        String n=request.getParameter("userName");  
+        out.print("Welcome "+n);  
+
+    }  
+}  
+```
+## web.xml
+```xml
+<web-app>  
+
+    <servlet>  
+        <servlet-name>Login</servlet-name>  
+        <servlet-class>Login</servlet-class>  
+    </servlet>  
+    
+    <servlet>  
+        <servlet-name>WelcomeServlet</servlet-name>  
+        <servlet-class>WelcomeServlet</servlet-class>  
+    </servlet>  
+    
+    
+    <servlet-mapping>  
+        <servlet-name>Login</servlet-name>  
+        <url-pattern>/servlet1</url-pattern>  
+    </servlet-mapping> 
+
+    <servlet-mapping>  
+        <servlet-name>WelcomeServlet</servlet-name>  
+        <url-pattern>/servlet2</url-pattern>  
+    </servlet-mapping>  
+    
+    <welcome-file-list>  
+        <welcome-file>index.html</welcome-file>  
+    </welcome-file-list>  
+
+</web-app>  
+```
