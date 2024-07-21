@@ -28,3 +28,111 @@
     returns the object of ServletConfig.
 ### 5. public String getServletInfo()
     returns information about servlet such as writer, copyright, version etc
+# 1. First type to create servlet using servlet interface
+###    Servlet interface needs to be implemented for creating any servlet (either directly or indirectly). It provides 3 life cycle methods that are used to initialize the servlet, to service the requests, and to destroy the servlet and 2 non-life cycle methods
+```java
+import java.io.*;  
+import javax.servlet.*;  
+  
+public class First implements Servlet
+{  
+
+    ServletConfig config=null;  
+    public void init(ServletConfig config)
+    {  
+        this.config=config;  
+        System.out.println("servlet is initialized");  
+    } 
+    public void service(ServletRequest req,ServletResponse res) throws IOException,ServletException
+    {  
+        res.setContentType("text/html");  
+        
+        PrintWriter out=res.getWriter();  
+        out.print("<html><body>");  
+        out.print("<b>hello simple servlet</b>");  
+        out.print("</body></html>");  
+    }  
+    public void destroy()
+    {
+        System.out.println("servlet is destroyed");
+    }  
+    public ServletConfig getServletConfig()
+    {
+        return config;
+    }  
+    public String getServletInfo()
+    {
+        return "copyright 2007-1010";
+    }  
+  
+}  
+```
+# 2. Second type to create servlet using GenericServlet
+### GenericServlet class implements Servlet
+### It provides the implementation of all the methods of these interfaces except the service method.
+```java
+import java.io.*;  
+import javax.servlet.*;  
+  
+public class First extends GenericServlet
+{  
+    public void service(ServletRequest req,ServletResponse res) throws IOException,ServletException
+    {  
+        res.setContentType("text/html");   
+        PrintWriter out=res.getWriter();  
+        out.print("<html><body>");  
+        out.print("<b>hello generic servlet</b>");  
+        out.print("</body></html>");  
+    }  
+}  
+
+```
+# 3. Third method to create servlet using HttpServlet 
+### The HttpServlet class extends the GenericServlet class. It provides http specific methods such as doGet, doPost, doHead, doTrace etc
+
+```java
+import javax.servlet.http.*;  
+import javax.servlet.*;  
+import java.io.*;  
+public class Third_3 extends HttpServlet
+{  
+    public void doGet(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException  
+    {  
+        res.setContentType("text/html");//setting the content type  
+        PrintWriter out = res.getWriter();  
+
+        //writing html in the stream  
+        out.println("<html><body>");  
+        out.println("Welcome to servlet");  
+        out.println("</body></html>");  
+        
+        out.close();//closing the stream  
+    }
+} 
+
+```
+
+
+```xml
+<!-- 
+    <web-app> represents the whole application.
+    <servlet> is sub element of <web-app> and represents the servlet.
+    <servlet-name> is sub element of <servlet> represents the name of the servlet.
+    <servlet-class> is sub element of <servlet> represents the class of the servlet.
+    <servlet-mapping> is sub element of <web-app>. It is used to map the servlet.
+    <url-pattern> is sub element of <servlet-mapping>. This pattern is used at client side to invoke the servlet.
+ -->
+<web-app>
+
+    <servlet>
+        <servlet-name>Third_3</servlet-name> 
+        <servlet-class>Third_3</servlet-class>
+    </servlet>  
+        
+    <servlet-mapping>  
+        <servlet-name>Third_3</servlet-name>  
+        <url-pattern>/Third_3</url-pattern>  
+    </servlet-mapping>  
+    
+</web-app>  
+```
