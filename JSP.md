@@ -43,3 +43,25 @@
   %>  
   <%= "Cube of 3 is:"+cube(3) %>
 ```
+```jsp
+ <%= "Declaration Tag <br>" %>    
+        <%!
+            int a = 23;
+            int b = 34;
+            int square(int c)
+            {
+                return c*c;
+            }
+        %>
+        
+        <%= "<br>Scriplet Tag <br>" %>
+        <%  
+            String name = request.getParameter("name");
+            out.print("Welcome "+name+"<br>");
+        %>  
+        
+        <%= "<br>Expression Tag <br>" %>
+        <%= "nazish is good girl <br>" %>
+        <%= "Addition is " +(a+b)+"<br>"  %>
+        <%= "Square is " +square(3)+"<br>" %>
+```
