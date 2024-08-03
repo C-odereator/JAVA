@@ -166,7 +166,7 @@ public class Login extends HttpServlet {
         String n=request.getParameter("userName");  
         String p=request.getParameter("userPass");  
           
-        if(p.equals("servlet")
+        if(p.equals("pass123")
         {  
             RequestDispatcher rd=request.getRequestDispatcher("servlet2");  
             rd.forward(request, response);  
