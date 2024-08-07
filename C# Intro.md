@@ -59,3 +59,65 @@ public class Program
     }  
 }  
 ```
+
+
+```c#
+
+        using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+class Program
+    {
+        static void Main()
+        {
+            string greeting = "Hello World!";
+            Console.WriteLine("Original string: " + greeting);
+
+            // Length
+            Console.WriteLine("Length: " + greeting.Length);
+
+            // Substring
+            string substring = greeting.Substring(0, 5);
+            Console.WriteLine("Substring: " + substring);
+
+            // Index Of
+            int index = greeting.IndexOf("o");
+            Console.WriteLine("Index : " + index);
+
+            // Replace
+            string replaced = greeting.Replace("World", "C#");
+            Console.WriteLine("Replaced: " + replaced);
+
+            // ToUpper and ToLower
+            Console.WriteLine("Uppercase: " + greeting.ToUpper());
+            Console.WriteLine("Lowercase: " + greeting.ToLower());
+
+            // Trim
+            string trimmed = "  Hello,C#!  ".Trim();
+            Console.WriteLine("Trimmed: " + trimmed);
+
+            // Contains    
+            bool contains = greeting.Contains("Hello");
+            Console.WriteLine("Contains : " + contains);
+            
+            // Split
+            string[] words = greeting.Split(',');
+            Console.WriteLine("Split words:");
+            foreach (string word in words)
+            {
+                Console.WriteLine(word);
+            }
+
+            // StartWith
+            bool startsWith = greeting.StartsWith("Hello");
+            Console.WriteLine("StartWith : " + startsWith);
+
+            // StartWith
+            bool endsWith = greeting.EndsWith("Hello");
+            Console.WriteLine("StartWith : " + endsWith);
+    }
+    }
+
+
+
+```
